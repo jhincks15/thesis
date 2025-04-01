@@ -3,6 +3,7 @@ from datetime import datetime as dt
 import matplotlib.pyplot as plt
 from statsmodels.graphics.tsaplots import plot_acf
 from statsmodels.tsa.stattools import acf
+from statsmodels.graphics.tsaplots import plot_pacf
 import seaborn as sns
 import scipy.stats as stats
 import numpy as np
@@ -70,6 +71,10 @@ plt.plot(range(1, 420), inc_m_diff)
 plt.title('Differenced Increments of Process (binned in min)')
 
 plot_acf(inc_m_diff, lags = 30, title = 'ACF of Differenced Increments (min)')
+plot_pacf(inc_m_diff, lags = 30, title = 'PACF of Differenced Increments (min)')
+
+kpss_test(inc_m)
+kpss_test(inc_m_diff)
 
 # Same thing for secs
 
@@ -81,8 +86,9 @@ plt.plot(range(1, time_len_s), inc_s_diff)
 plt.title('Differenced Increments of Process (binned in sec)')
 
 plot_acf(inc_s_diff, lags = 30, title = 'ACF of Differenced Increments (sec)')
+plot_pacf(inc_s_diff, lags = 30, title = 'PACF of Differenced Increments (sec)')
 
-kpss_test(inc_m_diff)
+kpss_test(inc_s)
 kpss_test(inc_s_diff)
 
 # Exponential QQ plot of Wait Times
